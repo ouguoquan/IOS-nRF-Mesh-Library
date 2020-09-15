@@ -30,7 +30,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OpenSSLHelper : NSObject
+@interface NRFMeshOpenSSLHelper : NSObject
 /// Generates 128-bit random data.
 - (NSData*) generateRandom;
 

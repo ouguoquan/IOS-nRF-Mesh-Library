@@ -81,7 +81,7 @@ public class ApplicationKey: Key, Codable {
     }
     
     private func regenerateKeyDerivaties() {
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         aid = helper.calculateK4(withN: key)
         
         // When the Application Key is imported from JSON, old key derivaties must

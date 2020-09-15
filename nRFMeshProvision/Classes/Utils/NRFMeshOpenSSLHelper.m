@@ -28,12 +28,12 @@
 * POSSIBILITY OF SUCH DAMAGE.
 */
 
-#import "OpenSSLHelper.h"
+#import "NRFMeshOpenSSLHelper.h"
 #import "openssl/cmac.h"
 #import "openssl/evp.h"
 #import "openssl/rand.h"
 
-@implementation OpenSSLHelper
+@implementation NRFMeshOpenSSLHelper
 
 - (NSData*) generateRandom {
     Byte buffer[16];

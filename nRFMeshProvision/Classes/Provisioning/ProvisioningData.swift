@@ -31,7 +31,7 @@
 import Foundation
 
 internal class ProvisioningData {
-    private let helper = OpenSSLHelper()
+    private let helper = NRFMeshOpenSSLHelper()
     
     private(set) var networkKey: NetworkKey!
     private(set) var ivIndex: IvIndex!

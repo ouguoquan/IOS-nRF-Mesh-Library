@@ -102,7 +102,7 @@ internal struct NetworkPdu {
         // See: Bluetooth Mesh Profile 1.0.1 Specification, chapter: 3.10.5.
         self.ivIndex = ivIndex.index(for: ivi)
         
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         for keys in keySets {
             // Deobfuscate CTL, TTL, SEQ and SRC.
             let deobfuscatedData = helper.deobfuscate(pdu, ivIndex: self.ivIndex,
@@ -189,7 +189,7 @@ internal struct NetworkPdu {
         // The key set used for encryption depends on the Key Refresh Phase.
         let keys = networkKey.transmitKeys
         
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         var nonce = Data([pduType.nonceId]) + deobfuscatedData + Data([0x00, 0x00]) + ivIndex.bigEndian
         if case .proxyConfiguration = pduType {
             nonce[1] = 0x00 // Pad

@@ -77,7 +77,7 @@ internal struct UpperTransportPdu {
             + accessMessage.destination.bigEndian
             + accessMessage.ivIndex.bigEndian
         
-        guard let decryptedData = OpenSSLHelper().calculateDecryptedCCM(encryptedData,
+        guard let decryptedData = NRFMeshOpenSSLHelper().calculateDecryptedCCM(encryptedData,
                   withKey: key, nonce: nonce, andMIC: mic,
                   withAdditionalData: virtualGroup?.address.virtualLabel?.data) else {
              return nil
@@ -124,7 +124,7 @@ internal struct UpperTransportPdu {
             + self.ivIndex.bigEndian
         
         self.transportMicSize = aszmic == 0 ? 4 : 8
-        self.transportPdu = OpenSSLHelper().calculateCCM(accessPdu, withKey: keySet.accessKey, nonce: nonce,
+        self.transportPdu = NRFMeshOpenSSLHelper().calculateCCM(accessPdu, withKey: keySet.accessKey, nonce: nonce,
                                                          andMICSize: transportMicSize,
                                                          withAdditionalData: pdu.destination.virtualLabel?.data)
     }

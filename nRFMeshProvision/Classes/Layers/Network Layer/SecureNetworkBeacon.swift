@@ -67,7 +67,7 @@ internal struct SecureNetworkBeacon: BeaconPdu {
         ivIndex = IvIndex(index: index, updateActive: updateActive)
         
         // Authenticate beacon using given Network Key.
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         if networkId == networkKey.networkId {
             let authenticationValue = helper.calculateCMAC(pdu.subdata(in: 1..<14), andKey: networkKey.keys.beaconKey)!
             guard authenticationValue.subdata(in: 0..<8) == pdu.subdata(in: 14..<22) else {

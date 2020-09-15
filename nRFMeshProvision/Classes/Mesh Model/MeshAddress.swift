@@ -62,7 +62,7 @@ public struct MeshAddress {
         self.virtualLabel = virtualLabel
         
         // Calculate the 16-bit virtual address based on the 128-bit label.
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         let salt = helper.calculateSalt("vtad".data(using: .ascii)!)!
         let hash = helper.calculateCMAC(Data(hex: virtualLabel.hex), andKey: salt)!
         var address = UInt16(data: hash.dropFirst(14)).bigEndian

@@ -40,7 +40,7 @@ internal struct NetworkKeyDerivaties {
     /// The Privacy Key.
     let privacyKey: Data!
     
-    init(withKey key: Data, using helper: OpenSSLHelper) {
+    init(withKey key: Data, using helper: NRFMeshOpenSSLHelper) {
         // Calculate Identity Key and Beacon Key.
         let P = Data([0x69, 0x64, 0x31, 0x32, 0x38, 0x01]) // "id128" || 0x01
         let saltIK = helper.calculateSalt("nkik".data(using: .ascii)!)!
@@ -139,11 +139,11 @@ public class NetworkKey: Key, Codable {
     
     /// Creates the primary Network Key for a mesh network.
     internal convenience init() {
-        try! self.init(name: "Primary Network Key", index: 0, key: OpenSSLHelper().generateRandom())
+        try! self.init(name: "Primary Network Key", index: 0, key: NRFMeshOpenSSLHelper().generateRandom())
     }
     
     private func regenerateKeyDerivaties() {
-        let helper = OpenSSLHelper()
+        let helper = NRFMeshOpenSSLHelper()
         // Calculate Network ID.
         networkId = helper.calculateK3(withN: key)
         // Calculate NID.
@@ -188,7 +188,7 @@ public class NetworkKey: Key, Codable {
                                                    debugDescription: "Key must be 32-character hexadecimal string")
         }
         key = keyData
-        networkId = OpenSSLHelper().calculateK3(withN: key)
+        networkId = NRFMeshOpenSSLHelper().calculateK3(withN: key)
         if let oldKeyHex = try container.decodeIfPresent(String.self, forKey: .oldKey) {
             guard let oldKeyData = Data(hex: oldKeyHex) else {
                 throw DecodingError.dataCorruptedError(forKey: .oldKey, in: container,

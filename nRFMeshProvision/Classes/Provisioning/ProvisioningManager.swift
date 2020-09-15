@@ -52,7 +52,7 @@ public protocol ProvisioningDelegate: class {
 }
 
 public class ProvisioningManager {
-    private let helper = OpenSSLHelper()
+    private let helper = NRFMeshOpenSSLHelper()
     
     private let unprovisionedDevice: UnprovisionedDevice
     private let bearer: ProvisioningBearer
