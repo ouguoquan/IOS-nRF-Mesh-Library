@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.swift_versions   = ['4.2', '5.0', '5.1', '5.2']
   s.source_files = 'nRFMeshProvision/Classes/**/*'
-  s.dependency 'OpenSSL-Universal', '= 1.0.2.19'
+  s.dependency 'OpenSSL-Universal', '= 1.0.2.17'
   s.frameworks = 'CoreBluetooth'
 end
